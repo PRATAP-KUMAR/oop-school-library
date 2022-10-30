@@ -10,7 +10,7 @@
 ### How to build the "OOP school library" app
 You will start by building the most essential pieces of the system. To do that, you will practice Object Oriented Programming. To build the app or system you will need to create the entities presented in this diagram.
 
-![](https://raw.githubusercontent.com/microverseinc/curriculum-ruby/main/oop/images/uml_class_diagram.png?token=GHSAT0AAAAAABZH6B2VP5T4XCIUJVNVKAICY25LTMQ)
+![uml_class_diagram](https://user-images.githubusercontent.com/40719899/198866124-04de9b22-4ab7-4884-8378-9be4bb969729.png)
 
 ## Getting Started
 
@@ -32,7 +32,7 @@ ls
 
 ## 🤝 Contributing
 
-Contributions, [issues](../../issues), and feature requests are welcome!  
+Contributions, issues, and feature requests are welcome!  
 Feel free to check the [issues page](../../issues/).
 
 ## Show your support
