@@ -1,5 +1,5 @@
 class Person
-  attr_reader :id
+  attr_reader :id, :rentals
   attr_accessor :name, :age
 
   def initialize(age, name = 'Unknown', parent_permission: true)
@@ -7,6 +7,7 @@ class Person
     @name = name
     @age = age
     @parent_permission = parent_permission
+    @rentals = []
   end
 
   # rubocop:disable Naming/PredicateName
