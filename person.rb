@@ -1,3 +1,5 @@
+require './rental'
+
 class Person
   attr_reader :id, :rentals
   attr_accessor :name, :age
@@ -20,5 +22,9 @@ class Person
 
   def can_use_services?
     true if is_of_age? || @parent_permission
+  end
+
+  def add_rental(date, book)
+    Rental.new(date, book, self)
   end
 end
