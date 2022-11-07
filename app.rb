@@ -53,43 +53,33 @@ class App
   # rubocop:enable Metrics/CyclomaticComplexity
 
   def create_person
-    print 'Do you want to create a student (1) or a teacher (2)? [Input the number]:'
+    print 'Select 1 for Student 2 for Teacher: '
     input = gets.chomp.to_i
-    case input
-    when 1
-      helper_func_create_student
-    when 2
-      helper_func_create_teacher
+    inputs = helper_func_create_person(['Age: ', 'Name: ',
+                                        if input == 1
+                                          'Classroom (select A for section-A, B for section-B etc): '
+                                        else
+                                          'Specialization: '
+                                        end])
+    person = if input == 1
+               Student.new(inputs[0], inputs[2],
+                           inputs[1])
+             else
+               Teacher.new(inputs[0], inputs[2], inputs[1])
+             end
+    @people.push(person)
+    print input == 1 ? 'Book created succesfully' : 'Teacher created succesfully'
+    message
+    logic
+  end
+
+  def helper_func_create_person(array)
+    outputs = []
+    array.each_with_index do |elem, idx|
+      print elem
+      outputs.push(idx.zero? ? gets.chomp.to_i : gets.chomp)
     end
-  end
-
-  def helper_func_create_student
-    print 'Age: '
-    age = gets.chomp.to_i
-    print 'Name: '
-    name = gets.chomp
-    print 'Classroom (example A for section-A, B for section-B): '
-    classroom = gets.chomp
-    student = Student.new(age, classroom, name)
-    @people.push(student)
-    print 'Person created succesfully'
-    print
-    message
-    logic
-  end
-
-  def helper_func_create_teacher
-    print 'Age: '
-    age = gets.chomp.to_i
-    print 'Name: '
-    name = gets.chomp
-    print 'Specialization: '
-    spec = gets.chomp
-    teacher = Teacher.new(age, spec, name)
-    @people.push(teacher)
-    print 'Person created successfully'
-    message
-    logic
+    outputs
   end
 
   def create_book
@@ -111,20 +101,25 @@ class App
   end
 
   def create_rental
-    print 'Select a book from the following list by S.No'
-    puts
-    helper_func_list_all_books
-    book_input = gets.chomp.to_i
-    print 'Select a person from the following list by S.No (not id)'
-    puts
-    helper_func_list_all_people
-    person_input = gets.chomp.to_i
+    inputs = helper_func_take_book_inputs_create_rentals(['Select a book from the following list by S.No: ',
+                                                          'Select a person from the following list by S.No (not ID): '])
     date = Time.now.strftime('%Y/%m/%d')
-    rental_created = Rental.new(date, @books[book_input - 1], @people[person_input - 1])
+    rental_created = Rental.new(date, @books[inputs[0] - 1], @people[inputs[1] - 1])
     @rentals.push(rental_created)
     print 'Retnal created succesfully'
     message
     logic
+  end
+
+  def helper_func_take_book_inputs_create_rentals(parameters)
+    outputs = []
+    parameters.each_with_index do |s, idx|
+      print s
+      puts
+      idx.zero? ? helper_func_list_all_books : helper_func_list_all_people
+      outputs.push(gets.chomp.to_i)
+    end
+    outputs
   end
 
   def list_all_people
