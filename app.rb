@@ -93,15 +93,21 @@ class App
   end
 
   def create_book
-    print 'Title: '
-    title = gets.chomp
-    print 'Author: '
-    author = gets.chomp
-    book = Book.new(title, author)
+    inputs = helper_func_take_inputs_create_book(['Title: ', 'Author: '])
+    book = Book.new(inputs[0], inputs[1])
     @books.push(book)
     print 'Book created succesfully'
     message
     logic
+  end
+
+  def helper_func_take_inputs_create_book(parameters)
+    outputs = []
+    parameters.each do |s|
+      print s
+      outputs.push(gets.chomp)
+    end
+    outputs
   end
 
   def create_rental
